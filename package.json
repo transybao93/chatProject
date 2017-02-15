@@ -2,7 +2,7 @@
   "name": "chat_project",
   "version": "1.0.0",
   "description": "chat project or small forum project",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "socket.io": "^1.7.2"
   },
