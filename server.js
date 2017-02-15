@@ -3,16 +3,20 @@
  * http using for create http server
  * io variable present for socket.io running on httpserver
  */
+var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var router = require('express').Router();
 var path = __dirname + '/view/';
+//declare public folder
+app.use('/static', express.static('public'));
+
 
 /**
  * [using when to connect some files in project]
- * @param  {[http]} req    [request]
- * @param  {[http]} res){               
+ * @param  {[http]} req)    -> request
+ * @param  {[http]} res)    -> response        
  * res.sendfile('view/client.html');} [using when to determine what file to load and where that file]
  */
 app.get('/', function(req, res){

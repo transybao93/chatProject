@@ -3,16 +3,8 @@
   <head>
 
   <title>Socket I/O | Home</title>
-   <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var socket = io();
-      //In socket.on, create a point call message or whatever you want to create message back to server
-      socket.on('mess', function(data){
-        // document.write(data);
-        document.getElementById('d').innerHTML = data.fromServer;
-      });
-      
-    </script>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
   </head>
 
@@ -21,7 +13,7 @@
   <div class="container-fluid">
   
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-      
+      123
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
       <p id="d">Chuẩn bị nhận tin từ server</p>
@@ -29,6 +21,19 @@
     
   </div>
   	
-    
+  <!-- Scripting -->
+  <script src="//code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="js/client.js"></script>
+    <!-- <script>
+      var socket = io();
+      //In socket.on, create a point call message or whatever you want to create message back to server
+      socket.on('mess', function(data){
+        // document.write(data);
+        document.getElementById('d').innerHTML = data.fromServer;
+      });
+      
+  </script> -->
   </body>
 </html>
