@@ -16,6 +16,10 @@
       123
     </div>
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <p>
+        Thông tin từ server: 
+        <p id="b"></p>
+      </p>
       <p id="d">Chuẩn bị nhận tin từ server</p>
     </div>
     
@@ -35,6 +39,11 @@
       });
       //send data back to server
       socket.emit('mess_back', {'fromClient':'This is the data from client send to server'});
+
+      //receive count variable from server
+      socket.on('count', function(data){
+        document.getElementById('b').innerHTML = data.count;
+      });
       
   </script>
   </body>

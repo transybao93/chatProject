@@ -2,6 +2,7 @@
  * variable app using for require express server
  * http using for create http server
  * io variable present for socket.io running on httpserver
+ * path used for router
  */
 var express = require('express');
 var app = require('express')();
@@ -27,8 +28,9 @@ app.get('/', function(req, res){
 //when have connection, 'connection' command will catch connect and
 //show a message to annouce that one user is connect to the server
 //through specific port
+var clients = 0;
 io.on('connection', function(socket){
-
+  clients++;
   console.log('A user connected');
 
 
@@ -59,12 +61,19 @@ io.on('connection', function(socket){
     });
 
 
-
+    /**
+     * Using socket.broadcast.emit when you want to 
+     * send data to all connected clients
+     */
+    socket.broadcast.emit('count', {count: clients + ' người kết nối'});
 
 
 
   //Whenever someone disconnects this piece of code executed
   socket.on('disconnect', function () {
+    //minus the user have just left
+    clients--;
+    socket.broadcast.emit('count', {count: clients + ' người kết nối'});
     console.log('A user disconnected');
   });
 
