@@ -52,6 +52,12 @@ io.on('connection', function(socket){
 
   }, 4000);
 
+    //receive data from client
+    socket.on('mess_back', function(data)
+    {
+        console.log(data.fromClient);
+    });
+
 
 
 
