@@ -1,9 +1,34 @@
 <!DOCTYPE html>
 <html>
-  <head><title>Hello world</title></head>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    var socket = io();
-  </script>
-  <body>Hello world</body>
+  <head>
+
+  <title>Socket I/O | Home</title>
+   <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io();
+      //In socket.on, create a point call message or whatever you want to create message back to server
+      socket.on('mess', function(data){
+        // document.write(data);
+        document.getElementById('d').innerHTML = data.fromServer;
+      });
+      
+    </script>
+
+  </head>
+
+  <body>
+
+  <div class="container-fluid">
+  
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+      
+    </div>
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+      <p id="d">Chuẩn bị nhận tin từ server</p>
+    </div>
+    
+  </div>
+  	
+    
+  </body>
 </html>
