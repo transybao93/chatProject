@@ -11,11 +11,11 @@ var io = require('socket.io')(http);
 var router = require('express').Router();
 var path = __dirname + '/view/';
 //declare public folder
-app.use('/static', express.static('public'));
+app.use(express.static('public'));
 
 
 /**
- * [using when to connect some files in project]
+ * [using when you want to connect some files in project]
  * @param  {[http]} req)    -> request
  * @param  {[http]} res)    -> response        
  * res.sendfile('view/client.html');} [using when to determine what file to load and where that file]
