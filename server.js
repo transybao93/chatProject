@@ -13,25 +13,24 @@ var path = __dirname + '/view/';
 //declare public folder
 app.use(express.static('public'));
 //mongoose database
-var mongoose = require('mongoose');
-//uistring
- var uristring =
-    process.env.MONGOLAB_URI ||
-    process.env.MONGOHQ_URL ||
-    'mongodb://heroku_t8g93r8b:Transybao93@ds157529.mlab.com:57529/heroku_t8g93r8b';
-    var app = '--app tsbforum';
-//check connection
-mongoose.connect(uristring + app, function (err, res) {
-  if (err) {
-  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  } else {
-  console.log ('Succeeded connected to: ' + uristring);
-  }
-});
-var connection = mongoose.createConnection(uristring);
-app.use(session({
-    store: new MongoStore({ mongooseConnection: connection })
-}));
+// var mongoose = require('mongoose');
+// //uistring
+//  var uristring =
+//     process.env.MONGOLAB_URI ||
+//     process.env.MONGOHQ_URL ||
+//     'mongodb://heroku_t8g93r8b:Transybao93@ds157529.mlab.com:57529/heroku_t8g93r8b';
+//     var app = '--app tsbforum';
+// //check connection
+// mongoose.connect(uristring + app, function (err, res) {
+//   if (err) {
+//   console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+//   } else {
+//   console.log ('Succeeded connected to: ' + uristring);
+//   }
+// });
+
+
+
 // //mysql database connection
 // var mysql = require('mysql');
 
