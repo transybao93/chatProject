@@ -188,7 +188,20 @@
       socket.on('count', function(data){
         document.getElementById('b').innerHTML = data.count;
       });
+
+      //receive data from mysql database
+      socket.on('ddd', function(data){
+        console.log(data.mysqlData);
+      });
       
+
+      function printObject(o) {
+        var out = '';
+        for (var p in o) {
+          out += p + ': ' + o[p] + '\n';
+        }
+        alert(out);
+      }
   </script>
   </body>
 </html>

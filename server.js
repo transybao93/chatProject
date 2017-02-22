@@ -12,8 +12,49 @@ var router = require('express').Router();
 var path = __dirname + '/view/';
 //declare public folder
 app.use(express.static('public'));
-//mysql database connection
-var mysql = require('mysql');
+//mongoose database
+var mongoose = require('mongoose');
+//uistring
+ var uristring =
+    process.env.MONGOLAB_URI ||
+    process.env.MONGOHQ_URL ||
+    'mongodb://heroku_t8g93r8b:Transybao93@ds157529.mlab.com:57529/heroku_t8g93r8b';
+    var app = '--app tsbforum';
+//check connection
+mongoose.connect(uristring + app, function (err, res) {
+  if (err) {
+  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+  console.log ('Succeeded connected to: ' + uristring);
+  }
+});
+var connection = mongoose.createConnection(uristring);
+app.use(session({
+    store: new MongoStore({ mongooseConnection: connection })
+}));
+// //mysql database connection
+// var mysql = require('mysql');
+
+// //mysql config and testing
+// var connection = mysql.createConnection({
+//   host     : 'mysql.hostinger.vn',
+//   user     : 'u503255377_blog1',
+//   password : 'transybao',
+//   database : 'u503255377_blog1'
+// });
+// //start connect
+// connection.connect();
+// //queries from database
+// connection.query('SELECT * from posts', function(err, rows, fields) {
+//   if (!err){
+//     console.log('The solution is: ', rows);
+//     //if exist data then emit it to clients in objects data
+//     socket.emit('ddd', {mysqlData: rows});
+//   }else{
+//     console.log('Error while performing Query.');
+//     console.log('Error details: ' + err);
+//   }
+// });
 
 
 /**
@@ -34,8 +75,6 @@ var clients = 0;
 io.on('connection', function(socket){
   clients++;
   console.log('A user connected');
-
-
 
   /**
    * socket.emit create pure data or data with labels event to server
