@@ -98,6 +98,9 @@ io.on('connection', function(socket){
     socket.on('mess_back', function(data)
     {
         console.log(data.fromClient);
+        //send message back to client to notify that server already know about client
+        //Also, sent list of connected client
+        socket.emit('mess_back', {fromServer:'Welcome baby !', count: clients + ' người kết nối'});
     });
 
 
