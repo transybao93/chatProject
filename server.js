@@ -12,6 +12,8 @@ var router = require('express').Router();
 var path = __dirname + '/view/';
 //declare public folder
 app.use(express.static('public'));
+//mysql database connection
+var mysql = require('mysql');
 
 
 /**
