@@ -147,7 +147,7 @@ app.use("/",router);
 /**
  * [Tells the app what port need to be listen to the app]
  */
-var port = 8000;
+var port = process.env.PORT || 8080;
 http.listen(port, function(){
   console.log('Running server on port: ' + port);
 });
