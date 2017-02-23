@@ -1,12 +1,26 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-
-var postSchema = new Schema({
-	pTitle: String,
-	pContent: String,
-	pAuthor: String,
-	pCreatedAt: Date,
+/**
+ * Mongoose Schema
+ */
+var postSchema = mongoose.Schema({
+  pTitle: { type: String, trim: true, required: true },
+  pContent: { type: String, trim: true, required: true },
+  pAuthor: { type: String, trim: true, required: true },
+  pCreatedAt: { type: Date, default: Date.now },
 });
-
-//create model
-var Post = mongoose.model('Post', postSchema, heroku_t8g93r8b);
+var Post = mongoose.model('Post', postSchema, 'forum');
+//insert some data
+var post = new Post({
+  pTitle: 'Post sample',
+  pContent: 'Post sample content',
+  pAuthor: 'Tran Sy Bao',
+  pCreatedAt: new Date(),
+});
+// add data to database
+post.save(function(err,data){
+  if(err)
+  {
+    console.log('Error: ' + err);
+  }else{
+    console.log('Saved!');
+  }
+});

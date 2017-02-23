@@ -18,6 +18,7 @@ var mUsername = 'transybao';
 var mPassword = 'transybao';
 var mDatabase = 'tsbforum';
 var mAddress =  'ds161029.mlab.com:61029';
+var mTempAddress = 'mongodb://localhost:27017/forum';
 //uistring
  var uristring =
     process.env.MONGOLAB_URI ||
@@ -25,39 +26,13 @@ var mAddress =  'ds161029.mlab.com:61029';
     'mongodb://' + mUsername + ':' + mPassword + '@' + mAddress + '/' + mDatabase;
     // var app = '--app tsbforum';
 //check connection
-mongoose.connect(uristring, function (err, res) {
+mongoose.connect(mTempAddress, function (err, res) {
   if (err) {
-  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+    console.log ('ERROR: ' + err);
   } else {
-  console.log ('Succeeded connected to: ' + uristring);
+    console.log ('Connected !');
   }
 });
-
-
-
-// //mysql database connection
-// var mysql = require('mysql');
-
-// //mysql config and testing
-// var connection = mysql.createConnection({
-//   host     : 'mysql.hostinger.vn',
-//   user     : 'u503255377_blog1',
-//   password : 'transybao',
-//   database : 'u503255377_blog1'
-// });
-// //start connect
-// connection.connect();
-// //queries from database
-// connection.query('SELECT * from posts', function(err, rows, fields) {
-//   if (!err){
-//     console.log('The solution is: ', rows);
-//     //if exist data then emit it to clients in objects data
-//     socket.emit('ddd', {mysqlData: rows});
-//   }else{
-//     console.log('Error while performing Query.');
-//     console.log('Error details: ' + err);
-//   }
-// });
 
 
 /**
@@ -67,7 +42,7 @@ mongoose.connect(uristring, function (err, res) {
  * res.sendfile('view/client.html');} [using when to determine what file to load and where that file]
  */
 app.get('/', function(req, res){
-  res.sendfile('view/client.html');
+  res.sendFile(path + 'client.html');
 });
 
 //Whenever someone connects this gets executed
@@ -88,31 +63,15 @@ io.on('connection', function(socket){
    * please call socket.on(data);
    * Function setTimeout(callback, after)
    */
-  setTimeout(function(){
-    //send data instant
-    // socket.send('Hehe, tin nhắn này đã được gửi từ server từ 4 giây trước');
-    
 
-    //send data using emit
-    socket.emit('mess', {fromServer: '123'});
-
-  }, 4000);
-
-    //receive data from client
-    socket.on('mess_back', function(data)
-    {
-        console.log(data.fromClient);
-        //send message back to client to notify that server already know about client
-        //Also, sent list of connected client
-        socket.emit('mess_back', {fromServer:'Welcome baby !', count: clients + ' người kết nối'});
-    });
-
+    //send connection to current connected client count
+    socket.emit('mess_back', {count: clients});
 
     /**
      * Using socket.broadcast.emit when you want to 
      * send data to all connected clients
      */
-    socket.broadcast.emit('count', {count: clients + ' người kết nối'});
+    socket.broadcast.emit('count', {count: clients});
 
 
 
@@ -120,7 +79,7 @@ io.on('connection', function(socket){
   socket.on('disconnect', function () {
     //minus the user have just left
     clients--;
-    socket.broadcast.emit('count', {count: clients + ' người kết nối'});
+    socket.broadcast.emit('count', {count: clients});
     console.log('A user disconnected');
   });
 
@@ -149,9 +108,44 @@ app.use("/",router);
 
 
 /**
+ * Mongoose Schema
+ */
+var postSchema = mongoose.Schema({
+  pTitle: { type: String, trim: true, required: true },
+  pContent: { type: String, trim: true, required: true },
+  pAuthor: { type: String, trim: true, required: true },
+  pViews: {type: Number, default: 0},
+  pCreatedAt: {type: Date},
+  userID: {type: Number, required:true},
+});
+var userSchema = mongoose.Schema({
+  uName: {type: String, max: 100, required:true},
+  uEmail: {type: String, required:true},
+  uPass: {type: String, max: 100, required:true},
+  registeredAt: {type: Date},
+});
+var Post = mongoose.model('Post', postSchema, 'forum');
+var User = mongoose.model('User', userSchema, 'forum');
+//insert some data
+var user = new User({
+  uName: 'Trần Sỹ Bảo',
+  uEmail: 'bao988@gmail.com',
+  uPass: '123',
+  registeredAt: new Date(),
+});
+user.save(function(err, data){
+  if(!err)
+  {
+    console.log('Added new user !');
+  }else{
+    console.log('Error: ' + err);
+  }
+});
+
+/**
  * [Tells the app what port need to be listen to the app]
  */
-var port = process.env.PORT || 8080;
+var port = process.env.PORT || 8000;
 http.listen(port, function(){
   console.log('Running server on port: ' + port);
 });

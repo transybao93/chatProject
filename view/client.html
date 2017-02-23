@@ -5,7 +5,7 @@
   <title>Forum | Home</title>
   <!-- Latest compiled and minified CSS & JS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-
+  <link rel="stylesheet" href="css/style.css">
   </head>
 
   <body>
@@ -24,22 +24,35 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Title</a>
+            <a class="navbar-brand" href="#" id="logoName">BaoJS.vn</a>
           </div>
       
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Tags</a></li>
-              <li><a href="#">Posts</a></li>
+              <li class="active">
+                <a href="#">
+                  <span class="glyphicon glyphicon-tags"></span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="glyphicon glyphicon-user"></span>
+                </a>
+              </li>
             </ul>
             <form class="navbar-form navbar-left" role="search">
               <div class="form-group">
                 <input type="text" class="form-control" placeholder="Search">
               </div>
-              <button type="submit" class="btn btn-default">Search</button>
+              <button type="submit" class="btn btn-default">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
             </form>
             <ul class="nav navbar-nav navbar-right">
+              <li>
+                <a href="javascript:void(0)"><span id="b"></span> connection(s)</a>
+              </li>
               <li><a href="#">Register</a></li>
               <li><a href="#">Login</a></li>
             </ul>
@@ -47,11 +60,17 @@
         </div>
       </nav>
       <!-- End menu -->
-
+      <!-- some buttons -->
+      <button type="button" style="float:right; clear:both" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>&nbsp;   
+        Write a post
+      </button>
+      <br>
+      <br>
       <!-- Single post -->
       <div class="table-responsive">
         <table class="table table-hover">
-          <thead>
+          <thead style="text-align: center">
             <tr>
               <th style="width:5%"></th>
               <th style="width:50%"></th>
@@ -152,18 +171,6 @@
 
 
 
-
-
-
-      <p>
-        Thông tin từ server: 
-        <p id="b"></p>
-      </p>
-      <p id="d">Chuẩn bị nhận tin từ server</p>
-
-
-
-
     </div>
 
 
@@ -177,14 +184,8 @@
   <script>
       var socket = io();
       //In socket.on, create a point call message or whatever you want to create message back to server
-      socket.on('mess', function(data){
-        // document.write(data);
-        document.getElementById('d').innerHTML = data.fromServer;
-      });
-      //send data back to server
-      socket.emit('mess_back', {'fromClient':'This is the data from client send to server'});
+
       socket.on('mess_back', function(data){
-        alert(data.fromServer);
         document.getElementById('b').innerHTML = data.count;
       });
 
