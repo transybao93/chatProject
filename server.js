@@ -115,12 +115,13 @@ var postSchema = mongoose.Schema({
   pContent: { type: String, trim: true, required: true },
   pAuthor: { type: String, trim: true, required: true },
   pViews: {type: Number, default: 0},
+  pTags: {type: String},
   pCreatedAt: {type: Date},
   userID: {type: Number, required:true},
 });
 var userSchema = mongoose.Schema({
-  uName: {type: String, max: 100, required:true},
-  uEmail: {type: String, required:true},
+  uName: {type: String, max: 100, required:true, trim: true},
+  uEmail: {type: String, required:true, trim: true},
   uPass: {type: String, max: 100, required:true},
   registeredAt: {type: Date},
 });
