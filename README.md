@@ -1,12 +1,16 @@
 # Chat project using Socket.io
-Phiên bản chat dùng trong học tập
+Small realtime forum projects
 
-**Version 1.0.0**
+#Author
+- Tran Sy Bao
+
+**Version 2.0**
 
 :hotsprings::hotsprings::hotsprings::hotsprings:
 
 # Versions
-- Release version 1.0.0: Include some basic steps such as socket.on, socket.emit, create basic nodejs structure.
+- v1.0: Basic features.
+- v2.0: Update mongoose connect.
 
 # Official documentation
 too lazy to write...
