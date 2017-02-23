@@ -9,4 +9,4 @@ var postSchema = new Schema({
 });
 
 //create model
-var Post = mongoose.model('Post', postSchema);
+var Post = mongoose.model('Post', postSchema, heroku_t8g93r8b);
