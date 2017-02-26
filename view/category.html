@@ -24,7 +24,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#" id="logoName">BaoJS.vn</a>
+            <a class="navbar-brand" href="/" id="logoName">BaoJS.vn</a>
           </div>
       
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -40,7 +40,7 @@
                   <span class="glyphicon glyphicon-user"></span>
                 </a>
               </li>
-              <li>
+              <li class="active">
                 <a href="/category">
                   <span class="glyphicon glyphicon-list"></span>
                 </a>
@@ -179,6 +179,8 @@
       <!-- End single post -->
 
 
+
+
     </div>
 
 
@@ -202,18 +204,6 @@
         document.getElementById('b').innerHTML = data.count;
       });
 
-
-      //get list of post from server
-      socket.on('pList', function(data){
-        alert(data.postList.length);
-        // if(data.postList)
-        // {
-        //   alert('Object');
-        // }else{
-        //   alert('Không phải là object');
-        // }
-
-      });
       
   </script>
   </body>

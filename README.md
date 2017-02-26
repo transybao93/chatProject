@@ -4,7 +4,7 @@ Small realtime forum projects
 #Author
 - Tran Sy Bao
 
-**Version 3.0**
+**Version 3.2**
 
 :hotsprings::hotsprings::hotsprings::hotsprings:
 
@@ -12,6 +12,7 @@ Small realtime forum projects
 - v1.0: Basic features.
 - v2.0: Update mongoose connect.
 - v3.0: Change forum interface.
+- v3.2: Update database.
 
 # Official documentation
 too lazy to write...
